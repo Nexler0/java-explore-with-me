@@ -13,14 +13,19 @@
 	<name>Explore With Me</name>
 
 	<groupId>ru.practicum</groupId>
-	<artifactId>explore-with-me</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>explorewithme</artifactId>
+	<version>1</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<modules>
+		<module>statistic</module>
+		<module>server</module>
+	</modules>
 
 	<build>
 		<pluginManagement>
