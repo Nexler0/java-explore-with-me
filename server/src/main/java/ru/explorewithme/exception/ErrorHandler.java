@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Arrays;
+
 @RestControllerAdvice
 @Slf4j
 public class ErrorHandler {
@@ -13,25 +15,25 @@ public class ErrorHandler {
     @ExceptionHandler({ValidationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST) //400
     public ErrorResponse incorrectParameter(final ValidationException e) {
-        return new ErrorResponse(e.getMessage(), "400");
+        return new ErrorResponse(Arrays.toString(e.getStackTrace()), e.getMessage(), "400");
     }
 
     @ExceptionHandler({NotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND) //404
     public ErrorResponse incorrectParameter(final NotFoundException e) {
-        return new ErrorResponse(e.getMessage(), "404");
+        return new ErrorResponse(Arrays.toString(e.getStackTrace()), e.getMessage(), "404");
     }
 
     @ExceptionHandler({ConflictException.class})
     @ResponseStatus(HttpStatus.CONFLICT) //409
     public ErrorResponse incorrectParameter(final ConflictException e) {
-        return new ErrorResponse(e.getMessage(), "409");
+        return new ErrorResponse(Arrays.toString(e.getStackTrace()), e.getMessage(), "409");
     }
 
     @ExceptionHandler({EmptyListException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500
     public ErrorResponse incorrectParameter(final RuntimeException e) {
-        return new ErrorResponse(e.getMessage(), "500");
+        return new ErrorResponse(Arrays.toString(e.getStackTrace()), e.getMessage(), "500");
     }
 
 }

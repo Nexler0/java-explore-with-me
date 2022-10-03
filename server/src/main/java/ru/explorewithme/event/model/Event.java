@@ -3,8 +3,13 @@ package ru.explorewithme.event.model;
 import ru.explorewithme.category.model.Category;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
+import ru.explorewithme.location.model.Location;
+import ru.explorewithme.user.model.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "events")
@@ -21,14 +26,42 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "annotation")
+    @NonNull
+    @NotEmpty
     private String annotation;
 
+    @NonNull
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
+    private Long confirmedRequest;
+    private LocalDateTime createdOn;
+    private String description;
+    @NotNull
+    private LocalDateTime eventDate;
 
-    @Column(name = "confirmed_request")
-    private Integer confirmedRequest;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "initiator_id")
+    private User initiator;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @NonNull
+    private Boolean paid;
+    private int participantLimit;
+    private LocalDateTime publishedOn;
+    private Boolean requestModeration;
+
+    @Enumerated(value = EnumType.STRING)
+    private EventState state;
+
+    @NotNull
+    @NotEmpty
+    private String title;
+    private int views;
 
 }
