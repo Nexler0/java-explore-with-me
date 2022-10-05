@@ -24,6 +24,7 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     public Compilation addCompilation(CompilationDto compilationDto) {
         Compilation compilation = CompilationMapper.toCompilation(compilationDto, eventRepository);
+        log.info("Compilations addCompilation: {}", compilation);
         return compilationRepository.save(compilation);
     }
 
@@ -33,6 +34,7 @@ public class CompilationServiceImpl implements CompilationService {
         List<Event> events = compilations.getEvents();
         events.remove(eventRepository.findById(eventId).get());
         compilations.setEvents(events);
+        log.info("Compilations deleteEventFromCompilation: {}", compilations);
         return compilations;
     }
 
@@ -42,6 +44,7 @@ public class CompilationServiceImpl implements CompilationService {
         List<Event> events = compilations.getEvents();
         events.add(eventRepository.findById(eventId).get());
         compilations.setEvents(events);
+        log.info("Compilations addEventFromCompilation: {}", compilations);
         return compilations;
     }
 
@@ -49,6 +52,7 @@ public class CompilationServiceImpl implements CompilationService {
     public Compilation unpinnedCompilation(Long compId) {
         Compilation compilations = compilationRepository.findById(compId).get();
         compilations.setPinned(false);
+        log.info("Compilations unpinnedCompilation: {}", compilations);
         return compilations;
     }
 
@@ -56,21 +60,27 @@ public class CompilationServiceImpl implements CompilationService {
     public Compilation pinnedCompilation(Long compId) {
         Compilation compilations = compilationRepository.findById(compId).get();
         compilations.setPinned(true);
+        log.info("Compilations pinnedCompilation: {}", compilations);
         return compilations;
     }
 
     @Override
     public void deleteCompilation(Long compId) {
+        log.info("Compilations deleteCompilation: {}", compId);
         compilationRepository.deleteById(compId);
     }
 
     @Override
     public List<Compilation> getCompilations(Boolean pinned, Integer from, Integer size) {
-        return compilationRepository.findAllByPinned(pinned, PageRequest.of(from, size)).toList();
+        List<Compilation> result = compilationRepository.findAllByPinned(pinned, PageRequest.of(from, size)).toList();
+        log.info("Compilations getCompilations: {}", result);
+        return result;
     }
 
     @Override
     public Compilation getCompilationById(Long compId) {
-        return compilationRepository.findById(compId).get();
+        Compilation compilation = compilationRepository.findById(compId).get();
+        log.info("Compilations getCompilations: {}", compilation);
+        return compilation;
     }
 }

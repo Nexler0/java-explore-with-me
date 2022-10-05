@@ -2,7 +2,7 @@ package ru.explorewithme.event.dto;
 
 import ru.explorewithme.category.repository.CategoryRepository;
 import ru.explorewithme.event.model.Event;
-import ru.explorewithme.event.model.EventState;
+import ru.explorewithme.event.model.State;
 import ru.explorewithme.location.repository.LocationRepository;
 import ru.explorewithme.user.dto.UserMapper;
 import ru.explorewithme.user.repository.UserRepository;
@@ -12,26 +12,28 @@ import java.time.format.DateTimeFormatter;
 
 public class EventMapper {
 
+    private static final DateTimeFormatter DATA_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     public static EventDto toEventDto(Event event) {
         EventDto eventDto = EventDto.builder()
                 .id(event.getId())
                 .annotation(event.getAnnotation())
-                .category((event.getCategory()).getId())
+                .category((event.getCategory().getId()))
                 .confirmedRequests(event.getConfirmedRequest())
-                .createdOn(event.getCreatedOn().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .createdOn(event.getCreatedOn().format(DATA_TIME_FORMATTER))
                 .description(event.getDescription())
-                .eventDate(event.getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .eventDate(event.getEventDate().format(DATA_TIME_FORMATTER))
                 .initiator(UserMapper.toUserShortDto(event.getInitiator()))
                 .location(event.getLocation())
                 .paid(event.getPaid())
                 .participantLimit(event.getParticipantLimit())
                 .requestModeration(event.getRequestModeration())
                 .state(event.getState().toString())
+                .title(event.getTitle())
                 .build();
 
         if (event.getPublishedOn() != null) {
-            eventDto.setPublishedOn(event.getPublishedOn()
-                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            eventDto.setPublishedOn(event.getPublishedOn().format(DATA_TIME_FORMATTER));
         }
         return eventDto;
     }
@@ -46,20 +48,44 @@ public class EventMapper {
         event.setCategory(categoryRepository.findById(eventDto.getCategory()).get());
         event.setCreatedOn(LocalDateTime.now().withNano(0));
         event.setDescription(eventDto.getDescription());
-        event.setEventDate(LocalDateTime.parse(eventDto.getEventDate(),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        event.setEventDate(LocalDateTime.parse(eventDto.getEventDate(), DATA_TIME_FORMATTER));
         event.setInitiator(userRepository.findById(userId).get());
         event.setLocation(eventDto.getLocation());
         event.setPaid(eventDto.getPaid());
         event.setParticipantLimit(eventDto.getParticipantLimit());
         event.setRequestModeration(eventDto.getRequestModeration());
+        event.setTitle(eventDto.getTitle());
         if (eventDto.getState() != null) {
-            event.setState(EventState.valueOf(eventDto.getState()));
+            event.setState(State.valueOf(eventDto.getState()));
         } else {
-            event.setState(EventState.PENDING);
+            event.setState(State.PENDING);
         }
         event.setTitle(eventDto.getTitle());
         event.setViews(0);
         return event;
+    }
+
+    public static EventDtoFull toEventDtoFull(Event event) {
+        EventDtoFull eventDtoFull = EventDtoFull.builder()
+                .id(event.getId())
+                .annotation(event.getAnnotation())
+                .category((event.getCategory()))
+                .confirmedRequests(event.getConfirmedRequest())
+                .createdOn(event.getCreatedOn().format(DATA_TIME_FORMATTER))
+                .description(event.getDescription())
+                .eventDate(event.getEventDate().format(DATA_TIME_FORMATTER))
+                .initiator(UserMapper.toUserShortDto(event.getInitiator()))
+                .location(event.getLocation())
+                .paid(event.getPaid())
+                .participantLimit(event.getParticipantLimit())
+                .requestModeration(event.getRequestModeration())
+                .state(event.getState().toString())
+                .title(event.getTitle())
+                .build();
+
+        if (event.getPublishedOn() != null) {
+            eventDtoFull.setPublishedOn(event.getPublishedOn().format(DATA_TIME_FORMATTER));
+        }
+        return eventDtoFull;
     }
 }

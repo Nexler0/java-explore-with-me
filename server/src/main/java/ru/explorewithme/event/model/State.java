@@ -1,13 +1,15 @@
 package ru.explorewithme.event.model;
 
-public enum EventState {
+public enum State {
     PENDING("PENDING"),
     PUBLISHED("PUBLISHED"),
-    CANCELED("CANCELED");
+    CANCELED("CANCELED"),
+    CONFIRMED("CONFIRMED"),
+    REJECTED("REJECTED");
 
     private final String name;
 
-    EventState(String canceled) {
+    State(String canceled) {
         this.name = canceled;
     }
 

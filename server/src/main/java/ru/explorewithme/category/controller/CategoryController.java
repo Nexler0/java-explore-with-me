@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.explorewithme.category.service.CategoryService;
 import ru.explorewithme.category.dto.CategoryDto;
-import ru.explorewithme.category.dto.CategoryMapper;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/categories")

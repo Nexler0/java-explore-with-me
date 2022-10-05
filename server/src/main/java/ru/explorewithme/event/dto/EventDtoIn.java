@@ -8,13 +8,14 @@ import ru.explorewithme.location.model.Location;
 @Builder
 public class EventDtoIn {
 
+    private Long id;
     private String annotation;
     private Long category;
     private String description;
     private String eventDate;
     private Location location;
     private Boolean paid;
-    private Integer participantLimit;
+    private Long participantLimit;
     private Boolean requestModeration;
     private String title;
     private String state;

@@ -8,8 +8,7 @@ import ru.explorewithme.location.repository.LocationRepository;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class LocationServiceImpl implements LocationService{
+public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
-
 }

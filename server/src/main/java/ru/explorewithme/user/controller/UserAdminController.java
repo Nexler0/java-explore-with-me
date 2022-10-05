@@ -16,11 +16,13 @@ public class UserAdminController {
     private final UserService userService;
 
     @GetMapping
-    public List<UserDto> getAllCategories(@RequestParam(name = "size", defaultValue = "10",
-                                                  required = false) Integer size,
-                                          @RequestParam(name = "from", defaultValue = "0",
-                                                  required = false) Integer from) {
-        return userService.getAllUsers(from, size);
+    public List<UserDto> getAllCategories(@RequestParam(name = "ids", required = false)
+                                                  List<Long> userIds,
+                                          @RequestParam(name = "size", defaultValue = "10", required = false)
+                                                  Integer size,
+                                          @RequestParam(name = "from", defaultValue = "0", required = false)
+                                                  Integer from) {
+        return userService.getAllUsers(userIds, from, size);
     }
 
     @PostMapping

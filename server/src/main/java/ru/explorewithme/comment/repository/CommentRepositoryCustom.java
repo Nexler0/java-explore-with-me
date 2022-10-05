@@ -1,6 +1,8 @@
 package ru.explorewithme.comment.repository;
 
-//TODO реализация в будущем спринте
+/**
+ * Supporting class for main repository
+ */
 
 public interface CommentRepositoryCustom {
 }

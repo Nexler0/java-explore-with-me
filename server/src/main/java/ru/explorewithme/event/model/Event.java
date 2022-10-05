@@ -34,7 +34,7 @@ public class Event {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
-    private Long confirmedRequest;
+    private Long confirmedRequest = 0L;
     private LocalDateTime createdOn;
     private String description;
     @NotNull
@@ -52,12 +52,12 @@ public class Event {
 
     @NonNull
     private Boolean paid;
-    private int participantLimit;
+    private Long participantLimit = 0L;
     private LocalDateTime publishedOn;
     private Boolean requestModeration;
 
     @Enumerated(value = EnumType.STRING)
-    private EventState state;
+    private State state;
 
     @NotNull
     @NotEmpty

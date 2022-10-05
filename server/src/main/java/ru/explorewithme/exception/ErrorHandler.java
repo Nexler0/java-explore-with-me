@@ -24,6 +24,12 @@ public class ErrorHandler {
         return new ErrorResponse(Arrays.toString(e.getStackTrace()), e.getMessage(), "404");
     }
 
+    @ExceptionHandler({ForbiddenException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN) //403
+    public ErrorResponse incorrectParameter(final ForbiddenException e) {
+        return new ErrorResponse(Arrays.toString(e.getStackTrace()), e.getMessage(), "404");
+    }
+
     @ExceptionHandler({ConflictException.class})
     @ResponseStatus(HttpStatus.CONFLICT) //409
     public ErrorResponse incorrectParameter(final ConflictException e) {

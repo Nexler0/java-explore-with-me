@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import ru.explorewithme.event.dto.EventDto;
-import ru.explorewithme.event.model.EventState;
+import ru.explorewithme.event.model.State;
 import ru.explorewithme.event.service.EventService;
 
 import java.time.LocalDateTime;
@@ -19,7 +19,7 @@ public class EventAdminController {
 
     @GetMapping
     List<EventDto> getEventsAdmin(@RequestParam(name = "users", required = false) List<Long> userIds,
-                                  @RequestParam(required = false) List<EventState> states,
+                                  @RequestParam(required = false) List<State> states,
                                   @RequestParam(required = false, name = "categories") List<Long> categoryIds,
                                   @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
                                           LocalDateTime rangeStart,
@@ -36,12 +36,12 @@ public class EventAdminController {
     }
 
     @PatchMapping("/{eventId}/publish")
-    EventDto publishEvent(@PathVariable Long eventId){
+    EventDto publishEvent(@PathVariable Long eventId) {
         return eventService.setPublishEvent(eventId);
     }
 
     @PatchMapping("/{eventId}/reject")
-    EventDto rejectEvent(@PathVariable Long eventId){
+    EventDto rejectEvent(@PathVariable Long eventId) {
         return eventService.setRejectEvent(eventId);
     }
 

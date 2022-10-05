@@ -2,16 +2,17 @@ package ru.explorewithme.event.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import ru.explorewithme.category.model.Category;
 import ru.explorewithme.location.model.Location;
 import ru.explorewithme.user.dto.UserShortDto;
 
 @Data
 @Builder
-public class EventDto {
+public class EventDtoFull {
 
     private Long id;
     private String annotation;
-    private Long category;
+    private Category category;
     private Long confirmedRequests;
     private String createdOn;
     private String description;

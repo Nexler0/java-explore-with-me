@@ -2,7 +2,7 @@ package ru.explorewithme.location.repository;
 
 import org.springframework.context.annotation.Lazy;
 
-public class LocationRepositoryImpl implements LocationRepositoryCustom{
+public class LocationRepositoryImpl implements LocationRepositoryCustom {
 
     private final LocationRepository locationRepository;
 

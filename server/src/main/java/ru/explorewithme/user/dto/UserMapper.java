@@ -22,7 +22,7 @@ public class UserMapper {
         return user;
     }
 
-    public static UserShortDto toUserShortDto(User u){
+    public static UserShortDto toUserShortDto(User u) {
         return new UserShortDto(u.getId(), u.getName());
     }
 }
