@@ -1,8 +1,8 @@
-package ru.explorewithme.ewm.util;
+package ru.explorewithme.statistic.util;
 
-import ru.explorewithme.ewm.dto.StatisticDto;
-import ru.explorewithme.ewm.dto.StatisticDtoShort;
-import ru.explorewithme.ewm.model.Statistic;
+import ru.explorewithme.statistic.dto.StatisticDto;
+import ru.explorewithme.statistic.dto.StatisticDtoShort;
+import ru.explorewithme.statistic.model.Statistic;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

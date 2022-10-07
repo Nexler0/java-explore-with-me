@@ -1,4 +1,4 @@
-package ru.explorewithme.ewm.model;
+package ru.explorewithme.statistic.model;
 
 import lombok.*;
 import org.springframework.validation.annotation.Validated;

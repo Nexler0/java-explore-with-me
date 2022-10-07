@@ -1,11 +1,11 @@
-package ru.explorewithme.ewm.controller;
+package ru.explorewithme.statistic.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import ru.explorewithme.ewm.dto.StatisticDto;
-import ru.explorewithme.ewm.dto.StatisticDtoShort;
-import ru.explorewithme.ewm.service.StatisticService;
+import ru.explorewithme.statistic.dto.StatisticDto;
+import ru.explorewithme.statistic.dto.StatisticDtoShort;
+import ru.explorewithme.statistic.service.StatisticService;
 
 import java.time.LocalDateTime;
 import java.util.List;

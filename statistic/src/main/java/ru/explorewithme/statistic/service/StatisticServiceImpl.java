@@ -1,13 +1,13 @@
-package ru.explorewithme.ewm.service;
+package ru.explorewithme.statistic.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.explorewithme.ewm.dto.StatisticDto;
-import ru.explorewithme.ewm.dto.StatisticDtoShort;
-import ru.explorewithme.ewm.model.Statistic;
-import ru.explorewithme.ewm.repository.StatisticRepository;
-import ru.explorewithme.ewm.util.StatisticMapper;
+import ru.explorewithme.statistic.dto.StatisticDto;
+import ru.explorewithme.statistic.dto.StatisticDtoShort;
+import ru.explorewithme.statistic.model.Statistic;
+import ru.explorewithme.statistic.repository.StatisticRepository;
+import ru.explorewithme.statistic.util.StatisticMapper;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

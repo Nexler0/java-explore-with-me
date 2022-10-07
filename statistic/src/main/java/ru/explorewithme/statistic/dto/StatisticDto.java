@@ -1,4 +1,4 @@
-package ru.explorewithme.ewm.dto;
+package ru.explorewithme.statistic.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

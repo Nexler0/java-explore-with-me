@@ -1,9 +1,9 @@
-package ru.explorewithme.ewm.repository;
+package ru.explorewithme.statistic.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import ru.explorewithme.ewm.model.Statistic;
+import ru.explorewithme.statistic.model.Statistic;
 
 import java.time.LocalDateTime;
 import java.util.List;

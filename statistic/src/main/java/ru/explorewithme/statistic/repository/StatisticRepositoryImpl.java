@@ -1,4 +1,4 @@
-package ru.explorewithme.ewm.repository;
+package ru.explorewithme.statistic.repository;
 
 import org.springframework.context.annotation.Lazy;
 
