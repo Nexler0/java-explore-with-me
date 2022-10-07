@@ -20,7 +20,7 @@ public class HttpClient {
     public static void sendStatistic(String json) {
         java.net.http.HttpClient client = java.net.http.HttpClient.newHttpClient();
 
-        URI url = URI.create("http://localhost:9090" + "/hit");
+        URI url = URI.create("http://statistic:9090" + "/hit");
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(url)
                 .POST(HttpRequest.BodyPublishers.ofString(json))
@@ -38,7 +38,7 @@ public class HttpClient {
         java.net.http.HttpClient client = java.net.http.HttpClient.newBuilder().build();
         Gson gson = new GsonBuilder().create();
 
-        URI uri = URI.create("http://localhost:9090/stats?" +
+        URI uri = URI.create("http://statistic:9090" + "/stats?" +
                 "uris=" + uris.toString().substring(1, uris.toString().length() - 1) +
                 "&unique=" + unique);
         log.debug("HttpClient URI: {}", uri);
