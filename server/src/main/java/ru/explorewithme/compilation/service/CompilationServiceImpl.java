@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.explorewithme.compilation.dto.CompilationDto;
-import ru.explorewithme.compilation.dto.CompilationMapper;
+import ru.explorewithme.compilation.util.CompilationMapper;
 import ru.explorewithme.compilation.model.Compilation;
 import ru.explorewithme.compilation.repository.CompilationRepository;
 import ru.explorewithme.event.model.Event;

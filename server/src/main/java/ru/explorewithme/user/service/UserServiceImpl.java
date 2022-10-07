@@ -7,11 +7,11 @@ import ru.explorewithme.event.model.State;
 import ru.explorewithme.event.repository.EventRepository;
 import ru.explorewithme.exception.ValidationException;
 import ru.explorewithme.request.dto.RequestDto;
-import ru.explorewithme.request.dto.RequestMapper;
+import ru.explorewithme.request.util.RequestMapper;
 import ru.explorewithme.request.model.Request;
 import ru.explorewithme.request.repository.RequestRepository;
 import ru.explorewithme.user.dto.UserDto;
-import ru.explorewithme.user.dto.UserMapper;
+import ru.explorewithme.user.util.UserMapper;
 import ru.explorewithme.user.model.User;
 import ru.explorewithme.user.repository.UserRepository;
 
@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
                 request.setStatus(State.CONFIRMED);
             }
             request = requestRepository.save(request);
+            log.info("Users postUserRequest: {}", request);
             return RequestMapper.toRequestDto(request);
         } else {
             throw new ValidationException("Ошибка валидации запроса на участие");
@@ -91,6 +92,7 @@ public class UserServiceImpl implements UserService {
         log.info("Users cancelRequestByUser: userId: {}, \n requestId: {}", userId, requestId);
         if (request.getRequester().getId().equals(userId)) {
             request.setStatus(State.CANCELED);
+            log.info("Users cancelRequestByUser: {}", request);
             return RequestMapper.toRequestDto(request);
         } else {
             throw new ValidationException("Пользователь не является создателем запроса");

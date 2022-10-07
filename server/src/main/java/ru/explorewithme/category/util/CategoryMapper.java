@@ -1,5 +1,6 @@
-package ru.explorewithme.category.dto;
+package ru.explorewithme.category.util;
 
+import ru.explorewithme.category.dto.CategoryDto;
 import ru.explorewithme.category.model.Category;
 
 public class CategoryMapper {

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.explorewithme.category.dto.CategoryDto;
-import ru.explorewithme.category.dto.CategoryMapper;
+import ru.explorewithme.category.util.CategoryMapper;
 import ru.explorewithme.category.model.Category;
 import ru.explorewithme.category.repository.CategoryRepository;
 

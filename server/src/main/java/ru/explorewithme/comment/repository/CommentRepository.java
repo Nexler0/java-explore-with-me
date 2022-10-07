@@ -10,9 +10,9 @@ import java.util.List;
 @RepositoryRestResource(path = "comments")
 public interface CommentRepository extends JpaRepository<Comment, Long>, CommentRepositoryCustom {
 
-    @Query("select c from Comment c where c.item.id = ?1")
+    @Query("select c from Comment c where c.event.id = ?1")
     List<Comment> getAllByItemId(Long itemId);
 
-    @Query("select (count(c) > 0) from Comment c where c.item.id = ?1")
+    @Query("select (count(c) > 0) from Comment c where c.event.id = ?1")
     Boolean existsCommentByItemId(Long itemId);
 }

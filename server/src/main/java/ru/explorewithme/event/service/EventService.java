@@ -43,7 +43,7 @@ public interface EventService {
 
     EventDto cancelUserEvent(Long userId, Long eventId);
 
-    EventDtoFull getEvent(Long eventId);
+    EventDtoFull getEvent(Long eventId, HttpServletRequest request);
 
     List<RequestDto> getUserEventRequests(Long userId, Long eventId);
 

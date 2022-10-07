@@ -1,7 +1,8 @@
-package ru.explorewithme.request.dto;
+package ru.explorewithme.request.util;
 
 import ru.explorewithme.event.model.State;
 import ru.explorewithme.event.repository.EventRepository;
+import ru.explorewithme.request.dto.RequestDto;
 import ru.explorewithme.request.model.Request;
 import ru.explorewithme.user.repository.UserRepository;
 

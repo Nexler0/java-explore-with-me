@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class CommentShort {
+public class CommentDto {
 
     @EqualsAndHashCode.Exclude
     private Long id;

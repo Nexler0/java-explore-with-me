@@ -1,6 +1,8 @@
-package ru.explorewithme.user.dto;
+package ru.explorewithme.user.util;
 
 import org.springframework.stereotype.Component;
+import ru.explorewithme.user.dto.UserDto;
+import ru.explorewithme.user.dto.UserShortDto;
 import ru.explorewithme.user.model.User;
 
 @Component

@@ -1,5 +1,6 @@
-package ru.explorewithme.compilation.dto;
+package ru.explorewithme.compilation.util;
 
+import ru.explorewithme.compilation.dto.CompilationDto;
 import ru.explorewithme.compilation.model.Compilation;
 import ru.explorewithme.event.repository.EventRepository;
 

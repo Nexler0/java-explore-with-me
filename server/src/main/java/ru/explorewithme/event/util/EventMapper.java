@@ -1,10 +1,13 @@
-package ru.explorewithme.event.dto;
+package ru.explorewithme.event.util;
 
 import ru.explorewithme.category.repository.CategoryRepository;
+import ru.explorewithme.event.dto.EventDto;
+import ru.explorewithme.event.dto.EventDtoFull;
+import ru.explorewithme.event.dto.EventDtoIn;
 import ru.explorewithme.event.model.Event;
 import ru.explorewithme.event.model.State;
 import ru.explorewithme.location.repository.LocationRepository;
-import ru.explorewithme.user.dto.UserMapper;
+import ru.explorewithme.user.util.UserMapper;
 import ru.explorewithme.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
@@ -81,6 +84,7 @@ public class EventMapper {
                 .requestModeration(event.getRequestModeration())
                 .state(event.getState().toString())
                 .title(event.getTitle())
+                .views(event.getViews())
                 .build();
 
         if (event.getPublishedOn() != null) {

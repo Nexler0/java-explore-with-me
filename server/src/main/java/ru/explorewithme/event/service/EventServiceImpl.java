@@ -1,14 +1,16 @@
 package ru.explorewithme.event.service;
 
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.explorewithme.category.repository.CategoryRepository;
+import ru.explorewithme.event.statisticDto.StatisticDto;
 import ru.explorewithme.event.dto.EventDto;
 import ru.explorewithme.event.dto.EventDtoFull;
 import ru.explorewithme.event.dto.EventDtoIn;
-import ru.explorewithme.event.dto.EventMapper;
+import ru.explorewithme.event.util.EventMapper;
 import ru.explorewithme.event.model.Event;
 import ru.explorewithme.event.model.State;
 import ru.explorewithme.event.repository.EventRepository;
@@ -16,7 +18,7 @@ import ru.explorewithme.exception.ForbiddenException;
 import ru.explorewithme.exception.ValidationException;
 import ru.explorewithme.location.repository.LocationRepository;
 import ru.explorewithme.request.dto.RequestDto;
-import ru.explorewithme.request.dto.RequestMapper;
+import ru.explorewithme.request.util.RequestMapper;
 import ru.explorewithme.request.model.Request;
 import ru.explorewithme.request.repository.RequestRepository;
 import ru.explorewithme.user.repository.UserRepository;
@@ -28,6 +30,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static ru.explorewithme.client.HttpClient.getViews;
+import static ru.explorewithme.client.HttpClient.sendStatistic;
 
 @Service
 @Slf4j
@@ -75,13 +80,29 @@ public class EventServiceImpl implements EventService {
             result = result.stream().filter(event -> event.getParticipantLimit() < event.getConfirmedRequest())
                     .collect(Collectors.toList());
         }
+        StatisticDto statisticDto = new StatisticDto(null,
+                "ewm-main-service",
+                request.getRequestURI(),
+                request.getRemoteAddr(),
+                LocalDateTime.now().withNano(0).format(DATA_TIME_FORMATTER));
+        Gson gson = new Gson();
+        sendStatistic(gson.toJson(statisticDto));
+        result.forEach(event -> event.setViews(getViews(List.of("/events"), false)));
         log.info("Events getAllUsersEventsByParameter: {}", result);
         return result.stream().map(EventMapper::toEventDtoFull).collect(Collectors.toList());
     }
 
     @Override
-    public EventDtoFull getEvent(Long eventId) {
+    public EventDtoFull getEvent(Long eventId, HttpServletRequest request) {
         Event result = eventRepository.findById(eventId).get();
+        StatisticDto statisticDto = new StatisticDto(null,
+                "ewm-main-service",
+                request.getRequestURI(),
+                request.getRemoteAddr(),
+                LocalDateTime.now().withNano(0).format(DATA_TIME_FORMATTER));
+        Gson gson = new Gson();
+        sendStatistic(gson.toJson(statisticDto));
+        result.setViews(getViews(List.of("/events/" + result.getId()), false));
         log.info("Events getEvent: {}", result);
         return EventMapper.toEventDtoFull(result);
     }
