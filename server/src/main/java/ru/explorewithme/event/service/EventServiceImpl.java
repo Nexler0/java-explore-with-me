@@ -5,10 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.explorewithme.category.repository.CategoryRepository;
-import ru.explorewithme.event.dto.EventDto;
-import ru.explorewithme.event.dto.EventDtoFull;
-import ru.explorewithme.event.dto.EventDtoIn;
-import ru.explorewithme.event.dto.EventMapper;
+import ru.explorewithme.event.statisticDto.StatisticDto;
+import ru.explorewithme.user.dto.dto.EventDto;
+import ru.explorewithme.user.dto.dto.EventDtoFull;
+import ru.explorewithme.user.dto.dto.EventDtoIn;
+import ru.explorewithme.user.dto.dto.EventMapper;
 import ru.explorewithme.event.model.Event;
 import ru.explorewithme.event.model.State;
 import ru.explorewithme.event.repository.EventRepository;
@@ -28,6 +29,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static ru.explorewithme.client.HttpClient.sendStatistic;
 
 @Service
 @Slf4j
@@ -75,6 +78,12 @@ public class EventServiceImpl implements EventService {
             result = result.stream().filter(event -> event.getParticipantLimit() < event.getConfirmedRequest())
                     .collect(Collectors.toList());
         }
+        StatisticDto statisticDto = new StatisticDto(null,
+                "ewm-main-service",
+                request.getRequestURI(),
+                request.getRemoteUser(),
+                LocalDateTime.now().withNano(0).format(DATA_TIME_FORMATTER));
+        sendStatistic();
         log.info("Events getAllUsersEventsByParameter: {}", result);
         return result.stream().map(EventMapper::toEventDtoFull).collect(Collectors.toList());
     }

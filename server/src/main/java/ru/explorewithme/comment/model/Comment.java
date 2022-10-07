@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import ru.explorewithme.user.model.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -24,12 +25,13 @@ public class Comment {
     private Long id;
 
     @NotEmpty
+    @NotBlank
     @Column(name = "text")
     private String text;
 
     @OneToOne
-    @JoinColumn(name = "item_id")
-    private Event item;
+    @JoinColumn(name = "event_id")
+    private Event event;
 
     @OneToOne
     @JoinColumn(name = "author_id")

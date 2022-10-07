@@ -1,4 +1,4 @@
-package ru.explorewithme.event.dto;
+package ru.explorewithme.user.dto.dto;
 
 import ru.explorewithme.category.repository.CategoryRepository;
 import ru.explorewithme.event.model.Event;

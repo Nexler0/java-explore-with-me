@@ -3,9 +3,9 @@ package ru.explorewithme.event.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import ru.explorewithme.event.dto.EventDto;
-import ru.explorewithme.event.dto.EventDtoFull;
-import ru.explorewithme.event.dto.EventDtoIn;
+import ru.explorewithme.user.dto.dto.EventDto;
+import ru.explorewithme.user.dto.dto.EventDtoFull;
+import ru.explorewithme.user.dto.dto.EventDtoIn;
 import ru.explorewithme.event.service.EventService;
 import ru.explorewithme.request.dto.RequestDto;
 

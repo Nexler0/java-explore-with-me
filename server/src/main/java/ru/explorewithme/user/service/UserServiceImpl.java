@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
                 request.setStatus(State.CONFIRMED);
             }
             request = requestRepository.save(request);
+            log.info("Users postUserRequest: {}", request);
             return RequestMapper.toRequestDto(request);
         } else {
             throw new ValidationException("Ошибка валидации запроса на участие");
@@ -91,6 +92,7 @@ public class UserServiceImpl implements UserService {
         log.info("Users cancelRequestByUser: userId: {}, \n requestId: {}", userId, requestId);
         if (request.getRequester().getId().equals(userId)) {
             request.setStatus(State.CANCELED);
+            log.info("Users cancelRequestByUser: {}", request);
             return RequestMapper.toRequestDto(request);
         } else {
             throw new ValidationException("Пользователь не является создателем запроса");

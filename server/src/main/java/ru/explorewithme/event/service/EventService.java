@@ -1,8 +1,8 @@
 package ru.explorewithme.event.service;
 
-import ru.explorewithme.event.dto.EventDto;
-import ru.explorewithme.event.dto.EventDtoFull;
-import ru.explorewithme.event.dto.EventDtoIn;
+import ru.explorewithme.user.dto.dto.EventDto;
+import ru.explorewithme.user.dto.dto.EventDtoFull;
+import ru.explorewithme.user.dto.dto.EventDtoIn;
 import ru.explorewithme.event.model.State;
 import ru.explorewithme.request.dto.RequestDto;
 
