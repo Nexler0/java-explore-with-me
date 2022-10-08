@@ -20,9 +20,8 @@
         </dependency>
 
         <dependency>
-            <groupId>de.gerdi-project</groupId>
-            <artifactId>GSON</artifactId>
-            <version>6.0.6</version>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
 
         <dependency>

@@ -4,6 +4,12 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * Обьект формирования отчета об ошибке
+ *
+ * @see ErrorHandler
+ */
+
 @Data
 public class ErrorResponse {
     private final String error;
