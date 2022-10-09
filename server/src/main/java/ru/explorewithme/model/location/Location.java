@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
  * Обьект Локации
  *
  * @see ru.explorewithme.model.event.Event
- * @see ru.explorewithme.service.location.LocationService
  */
 
 @Entity
@@ -20,6 +19,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 @Validated
 @NoArgsConstructor
+@AllArgsConstructor
 public class Location {
 
     @Id
@@ -32,4 +32,8 @@ public class Location {
     @NotNull
     private Double lon; // долгота
 
+    public Location(double lat, double lon) {
+        this.lat = lat;
+        this.lon = lon;
+    }
 }

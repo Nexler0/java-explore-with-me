@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import ru.explorewithme.model.location.Location;
 
+import javax.persistence.ManyToOne;
+
 /**
  * Обьект События
  *

@@ -18,8 +18,8 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, Comment
      *
      * @param eventId идентификатор события
      */
-    @Query("select c from Comment c where c.event.id = ?1")
-    List<Comment> getAllByEventId(Long eventId);
+    @Query("select c from Comment c where c.event.id = ?1 and c.approve = ?2")
+    List<Comment> getAllByEventIdAndApprove(Long eventId, Boolean approve);
 
     /**
      * Проверка создан комментарий по id события

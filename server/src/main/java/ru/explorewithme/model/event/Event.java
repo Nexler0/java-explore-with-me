@@ -1,5 +1,6 @@
 package ru.explorewithme.model.event;
 
+import ru.explorewithme.dto.comment.CommentDto;
 import ru.explorewithme.model.category.Category;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Обьект События
