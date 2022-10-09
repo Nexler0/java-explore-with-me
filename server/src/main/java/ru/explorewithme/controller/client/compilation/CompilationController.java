@@ -21,7 +21,7 @@ public class CompilationController {
     private final CompilationService compilationService;
 
     /**
-     * Получение списка подборок
+     * Получение закрепленного списка подборок
      *
      * @param pinned статус закрепления страницы
      * @param from   номер страницы для пагинации

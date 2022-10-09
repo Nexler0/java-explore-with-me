@@ -8,6 +8,7 @@ import ru.explorewithme.model.user.User;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
 /**
  * Обьект Комментария
@@ -43,4 +44,9 @@ public class Comment {
     @OneToOne
     @JoinColumn(name = "author_id")
     private User author;
+
+    private LocalDateTime created;
+
+    @EqualsAndHashCode.Exclude
+    private Boolean approve = false;
 }
