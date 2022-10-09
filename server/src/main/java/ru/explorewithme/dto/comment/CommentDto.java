@@ -2,8 +2,6 @@ package ru.explorewithme.dto.comment;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 /**
  * Обьект комментария
  *
