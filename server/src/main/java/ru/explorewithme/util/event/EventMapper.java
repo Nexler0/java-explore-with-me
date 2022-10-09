@@ -13,10 +13,24 @@ import ru.explorewithme.repository.user.UserRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Преобразование Обьекта События в Дто и ФуллДто
+ *
+ * @see Event
+ * @see EventDto
+ * @see EventDtoFull
+ * @see EventDtoIn
+ */
+
 public class EventMapper {
 
     private static final DateTimeFormatter DATA_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    /**
+     * Преобразование в Дто
+     *
+     * @param event Обьект События
+     */
     public static EventDto toEventDto(Event event) {
         EventDto eventDto = EventDto.builder()
                 .id(event.getId())
@@ -41,6 +55,15 @@ public class EventMapper {
         return eventDto;
     }
 
+    /**
+     * Преобрвазование в Обьект События из Дто
+     *
+     * @param userId             идентификатор пользователя
+     * @param eventDto           Дто события
+     * @param userRepository     инжекция репозитория
+     * @param locationRepository инжекция репозитория
+     * @param categoryRepository инжекция репозитория
+     */
     public static Event toEvent(Long userId,
                                 EventDtoIn eventDto,
                                 UserRepository userRepository,
@@ -68,6 +91,11 @@ public class EventMapper {
         return event;
     }
 
+    /**
+     * Преобразование в Полное Дто
+     *
+     * @param event Обьект События
+     */
     public static EventDtoFull toEventDtoFull(Event event) {
         EventDtoFull eventDtoFull = EventDtoFull.builder()
                 .id(event.getId())

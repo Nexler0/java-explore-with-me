@@ -6,6 +6,15 @@ import org.springframework.validation.annotation.Validated;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Обьект Статистики
+ *
+ * @see ru.explorewithme.dto.statistic.StatisticDto
+ * @see ru.explorewithme.dto.statistic.StatisticDto
+ * @see ru.explorewithme.dto.statistic.StatisticDtoShort
+ * @see ru.explorewithme.service.statistic.StatisticService
+ */
+
 @Entity
 @Table(name = "statistics")
 @Validated

@@ -10,17 +10,37 @@ import ru.explorewithme.service.statistic.StatisticService;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * API для работы со статистикой
+ *
+ * @see StatisticController
+ */
+
 @RestController
 @RequiredArgsConstructor
 public class StatisticController {
 
     private final StatisticService statisticService;
 
+    /**
+     * Добавление статистики
+     *
+     * @param statisticDto Дто статистики
+     */
+
     @PostMapping("/hit")
-    public StatisticDto postStatistic(@RequestBody StatisticDto statistic) {
-        return statisticService.postStatistic(statistic);
+    public StatisticDto postStatistic(@RequestBody StatisticDto statisticDto) {
+        return statisticService.postStatistic(statisticDto);
     }
 
+    /**
+     * Получение списка статистики по параметрам
+     *
+     * @param start  период начала поиска
+     * @param end    период окончания поиска
+     * @param uris   списо URI для поиска
+     * @param unique флаг уникальности IP адресов
+     */
     @GetMapping("/stats")
     public List<StatisticDtoShort> getStatsByUri(@RequestParam(name = "start", required = false)
                                                  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,

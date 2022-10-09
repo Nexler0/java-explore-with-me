@@ -9,10 +9,24 @@ import ru.explorewithme.repository.user.UserRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Преобразование обьекта Запроса в Дто и обратно
+ *
+ * @see Request
+ * @see RequestDto
+ */
+
 public class RequestMapper {
 
     private static final DateTimeFormatter DATA_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    /**
+     * Преобрвазование в Обьект Запроса из Дто
+     *
+     * @param requestDto      Дто запроса
+     * @param eventRepository инжекция репозитория
+     * @param userRepository  инжекция репозитория
+     */
     public static Request toRequest(RequestDto requestDto,
                                     EventRepository eventRepository,
                                     UserRepository userRepository) {
@@ -23,6 +37,11 @@ public class RequestMapper {
                 State.valueOf(requestDto.getStatus()));
     }
 
+    /**
+     * Преобразование в Дто
+     *
+     * @param request Обьект запроса
+     */
     public static RequestDto toRequestDto(Request request) {
         return new RequestDto(request.getId(),
                 request.getCreated().format(DATA_TIME_FORMATTER),

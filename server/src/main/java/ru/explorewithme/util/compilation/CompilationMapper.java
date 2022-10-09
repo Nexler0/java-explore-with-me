@@ -6,8 +6,20 @@ import ru.explorewithme.repository.event.EventRepository;
 
 import java.util.ArrayList;
 
-public class CompilationMapper {
+/**
+ * Преобразование Дто в обьект Подборки
+ *
+ * @see Compilation
+ * @see CompilationDto
+ */
 
+public class CompilationMapper {
+    /**
+     * Преобразование  Дто в обьект Компиляции
+     *
+     * @param compilationDto  Обьект Дто Компиляции
+     * @param eventRepository Инжекция репозитория
+     */
     public static Compilation toCompilation(CompilationDto compilationDto, EventRepository eventRepository) {
         Compilation compilation = new Compilation();
         if (compilationDto.getEvents() != null && !compilationDto.getEvents().isEmpty()) {
