@@ -9,6 +9,7 @@ import ru.explorewithme.model.comment.Comment;
 import ru.explorewithme.model.event.Event;
 import ru.explorewithme.model.event.State;
 import ru.explorewithme.model.request.Request;
+import ru.explorewithme.model.user.User;
 import ru.explorewithme.repository.comment.CommentRepository;
 import ru.explorewithme.repository.event.EventRepository;
 import ru.explorewithme.repository.request.RequestRepository;
@@ -61,5 +62,20 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentRepository.findById(comId).get();
         comment.setApprove(true);
         return CommentMapper.toCommentDto(commentRepository.save(comment));
+    }
+
+    @Override
+    public void deleteComment(Long userId, Long eventId, Long commentId) {
+        User author = userRepository.findById(userId).get();
+        Comment comment = commentRepository.findById(commentId).get();
+        if (comment.getAuthor().equals(author)) {
+            commentRepository.delete(comment);
+        }
+    }
+
+    @Override
+    public void deleteComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId).get();
+        commentRepository.delete(comment);
     }
 }

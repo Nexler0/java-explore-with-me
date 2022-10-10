@@ -35,5 +35,20 @@ public interface CommentService {
      */
     CommentDto setApproveToComment(Long comId);
 
+    /**
+     * Удаление комментраиев пользователем
+     *
+     * @param userId    идентификатор пользователя
+     * @param eventId   идентификатор события
+     * @param commentId идентификатор комментария
+     */
+    void deleteComment(Long userId, Long eventId, Long commentId);
+
+    /**
+     * Удаление комментраиев администратором
+     *
+     * @param commentId идентификатор комментария
+     */
+    void deleteComment(Long commentId);
 }
 

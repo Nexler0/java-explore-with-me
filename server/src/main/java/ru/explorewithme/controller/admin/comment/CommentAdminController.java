@@ -28,4 +28,13 @@ public class CommentAdminController {
         return commentService.setApproveToComment(comId);
     }
 
+    /**
+     * Удаление комментраиев пользователем
+     *
+     * @param commentId идентификатор комментария
+     */
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
+    }
 }

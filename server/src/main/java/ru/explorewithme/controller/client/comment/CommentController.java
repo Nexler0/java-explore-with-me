@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/users/{userId}/events{eventId}/comments")
+@RequestMapping("/users/{userId}/events/{eventId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
 
@@ -28,9 +28,11 @@ public class CommentController {
      * @param commentDto Дто комментария
      */
     @PostMapping
-    private CommentDto postComment(@PathVariable Long userId,
-                                   @PathVariable Long eventId,
-                                   @RequestBody CommentDto commentDto) {
+    public CommentDto postComment(@PathVariable Long userId,
+                                  @PathVariable Long eventId,
+                                  @RequestBody CommentDto commentDto) {
+        commentDto.setEventId(eventId);
+        commentDto.setAuthorId(userId);
         return commentService.postComment(userId, eventId, commentDto);
     }
 
@@ -41,9 +43,23 @@ public class CommentController {
      * @param eventId идентификатор события
      */
     @GetMapping
-    private List<CommentDto> getComments(@PathVariable Long userId,
-                                         @PathVariable Long eventId) {
+    public List<CommentDto> getComments(@PathVariable Long userId,
+                                        @PathVariable Long eventId) {
         return commentService.getComments(userId, eventId);
+    }
+
+    /**
+     * Удаление комментраиев пользователем
+     *
+     * @param userId    идентификатор пользователя
+     * @param eventId   идентификатор события
+     * @param commentId идентификатор комментария
+     */
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable Long userId,
+                              @PathVariable Long eventId,
+                              @PathVariable Long commentId) {
+        commentService.deleteComment(userId, eventId, commentId);
     }
 
 }
