@@ -10,6 +10,8 @@ import ru.explorewithme.service.event.EventService;
 import ru.explorewithme.dto.request.RequestDto;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -52,8 +54,10 @@ public class EventController {
                                                 @RequestParam(required = false, defaultValue = "false")
                                                         Boolean onlyAvailable,
                                                 @RequestParam(name = "sort", required = false) String sort,
-                                                @RequestParam(required = false, defaultValue = "0") Integer from,
-                                                @RequestParam(required = false, defaultValue = "10") Integer size,
+                                                @RequestParam(required = false, defaultValue = "0")
+                                                    @PositiveOrZero Integer from,
+                                                @RequestParam(required = false, defaultValue = "10")
+                                                    @Positive Integer size,
                                                 HttpServletRequest request) {
         return eventService.getAllUsersEventsByParameter(text, categories, paid, rangeStart, rangeEnd, onlyAvailable,
                 sort, from, size, request);

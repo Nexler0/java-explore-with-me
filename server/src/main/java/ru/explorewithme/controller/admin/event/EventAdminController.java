@@ -7,6 +7,8 @@ import ru.explorewithme.dto.event.EventDto;
 import ru.explorewithme.model.event.State;
 import ru.explorewithme.service.event.EventService;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,8 +44,8 @@ public class EventAdminController {
                                           LocalDateTime rangeStart,
                                   @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
                                           LocalDateTime rangeEnd,
-                                  @RequestParam(required = false, defaultValue = "0") Integer from,
-                                  @RequestParam(required = false, defaultValue = "10") Integer size) {
+                                  @RequestParam(required = false, defaultValue = "0") @PositiveOrZero Integer from,
+                                  @RequestParam(required = false, defaultValue = "10") @Positive Integer size) {
         return eventService.getEventsByRequests(userIds, states, categoryIds, rangeStart, rangeEnd, from, size);
     }
 

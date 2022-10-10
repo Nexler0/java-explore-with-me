@@ -3,6 +3,7 @@ package ru.explorewithme.service.event;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.explorewithme.repository.category.CategoryRepository;
@@ -47,6 +48,9 @@ public class EventServiceImpl implements EventService {
     private final CategoryRepository categoryRepository;
     private final RequestRepository requestRepository;
 
+    @Value("${ewm_statistic_url}")
+    private String uriServer;
+
     @Override
     public List<EventDtoFull> getAllUsersEventsByParameter(String text,
                                                            List<Long> categories,
@@ -86,8 +90,8 @@ public class EventServiceImpl implements EventService {
                 request.getRemoteAddr(),
                 LocalDateTime.now().withNano(0).format(DATA_TIME_FORMATTER));
         Gson gson = new Gson();
-        sendStatistic(gson.toJson(statisticDto));
-        result.forEach(event -> event.setViews(getViews(List.of("/events"), false)));
+        sendStatistic(uriServer, gson.toJson(statisticDto));
+        result.forEach(event -> event.setViews(getViews(uriServer, List.of("/events"), false)));
         log.info("Events getAllUsersEventsByParameter: {}", result);
         return result.stream().map(EventMapper::toEventDtoFull).collect(Collectors.toList());
     }
@@ -101,8 +105,8 @@ public class EventServiceImpl implements EventService {
                 request.getRemoteAddr(),
                 LocalDateTime.now().withNano(0).format(DATA_TIME_FORMATTER));
         Gson gson = new Gson();
-        sendStatistic(gson.toJson(statisticDto));
-        result.setViews(getViews(List.of("/events/" + result.getId()), false));
+        sendStatistic(uriServer, gson.toJson(statisticDto));
+        result.setViews(getViews(uriServer, List.of("/events/" + result.getId()), false));
         log.info("Events getEvent: {}", result);
         return EventMapper.toEventDtoFull(result);
     }
