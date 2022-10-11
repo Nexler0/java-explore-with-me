@@ -3,6 +3,7 @@ package ru.explorewithme.client.httpclient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import lombok.extern.slf4j.Slf4j;
 import ru.explorewithme.dto.statisticDto.StatisticDtoShort;
 import ru.explorewithme.exception.ForbiddenException;
@@ -19,21 +20,18 @@ import java.util.List;
  *
  * @see HttpClient
  */
-
 @Slf4j
 public class HttpClient {
-
     /**
      * Отправление статистики на сервер
      *
-     * @param json
+     * @param json тело запроса
      */
-    public static void sendStatistic(String json) {
+    public static void sendStatistic(String uriServer, String json) {
         java.net.http.HttpClient client = java.net.http.HttpClient.newHttpClient();
-
-        URI url = URI.create("http://statistic:9090" + "/hit");
+        URI uri = URI.create(uriServer + "/hit");
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(url)
+                .uri(uri)
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .header("Content-Type", "application/json")
                 .build();
@@ -48,15 +46,14 @@ public class HttpClient {
     /**
      * Получение просмотров с серверс статистики
      *
-     * @param uris
-     * @param unique
-     * @return
+     * @param uris   Список uri для поиска
+     * @param unique статус уникальности, поиск по уникальным IP
      */
-    public static Integer getViews(List<String> uris, Boolean unique) {
+    public static Integer getViews(String uriServer, List<String> uris, Boolean unique) {
         java.net.http.HttpClient client = java.net.http.HttpClient.newBuilder().build();
         Gson gson = new GsonBuilder().create();
 
-        URI uri = URI.create("http://statistic:9090" + "/stats?" +
+        URI uri = URI.create(uriServer + "/stats?" +
                 "uris=" + uris.toString().substring(1, uris.toString().length() - 1) +
                 "&unique=" + unique);
         log.debug("HttpClient URI: {}", uri);

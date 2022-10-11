@@ -6,6 +6,8 @@ import ru.explorewithme.service.user.UserService;
 import ru.explorewithme.dto.user.UserDto;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 /**
@@ -32,9 +34,9 @@ public class UserAdminController {
     public List<UserDto> getAllUsers(@RequestParam(name = "ids", required = false)
                                              List<Long> userIds,
                                      @RequestParam(name = "size", defaultValue = "10", required = false)
-                                             Integer size,
+                                             @Positive Integer size,
                                      @RequestParam(name = "from", defaultValue = "0", required = false)
-                                             Integer from) {
+                                             @PositiveOrZero Integer from) {
         return userService.getAllUsers(userIds, from, size);
     }
 

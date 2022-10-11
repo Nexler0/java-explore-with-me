@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Validated
 public class Category {
 

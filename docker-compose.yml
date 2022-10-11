@@ -8,7 +8,7 @@ services:
     depends_on:
       - db_service
     environment:
-      - EWM_STATISTIC_URL=http://statistic:9090
+      - ewm_statistic_url=http://statistic:9090
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_service:5432/explorewithme
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root

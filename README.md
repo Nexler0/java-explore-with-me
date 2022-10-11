@@ -8,7 +8,7 @@
 Java Coretto 11, Spring-Boot 2.7.2, postgresql 14.4.0, Driver PSQL 42.3.6, Lombok 1.18.24, Docker-compose 3.8, GSON 2.9.0, Http client 4.5.13, Jpa, JDBC 4.2, Hibernate 6.2.3
 
 ###*__Эскиз страницы Front-end приложения__*
-![](../../AppData/Local/Temp/mainpage.png)
+![](S19_09_1662138862.png)
 
 ###*__Структура приложения__*
 ![](Structure.jpg)

@@ -2,8 +2,6 @@ package ru.explorewithme.dto.comment;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 /**
  * Обьект комментария
  *
@@ -19,9 +17,9 @@ public class CommentDto {
 
     @EqualsAndHashCode.Exclude
     private Long id;
-    private Long itemId;
+    private Long eventId;
     private String authorName;
     private Long authorId;
     private String text;
-    private LocalDateTime created;
+    private String created;
 }
