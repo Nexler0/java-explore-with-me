@@ -60,6 +60,7 @@ public class CommentServiceTest {
     @BeforeEach
     @Transactional
     void setUp() {
+
         user = new User(1L, "Jef", "user@123.ru");
         userService.addUser(UserMapper.toDto(user));
         user2 = new User(2L, "Jass", "Jass@mail.ru");
@@ -86,6 +87,7 @@ public class CommentServiceTest {
     @Transactional
     @Test
     void addNewCommentTest() {
+
         eventService.setPublishEvent(event.getId());
         RequestDto requestDto = userService.postUserRequest(user2.getId(), event.getId());
         eventService.confirmUserRequest(user.getId(), event.getId(), requestDto.getId());
@@ -169,5 +171,82 @@ public class CommentServiceTest {
 
         assertThat(comments, equalTo(List.of(CommentMapper.toCommentDto(comment),
                 CommentMapper.toCommentDto(comment3))));
+    }
+
+    @Transactional
+    @Test
+    void deleteCommentTest() {
+
+        User user3 = new User(3L, "Mesento", "Mesento@mail.ru");
+        userService.addUser(UserMapper.toDto(user3));
+        eventService.setPublishEvent(event.getId());
+        RequestDto requestDto = userService.postUserRequest(user2.getId(), event.getId());
+        eventService.confirmUserRequest(user.getId(), event.getId(), requestDto.getId());
+
+        comment = new Comment();
+        comment.setAuthor(user2);
+        comment.setEvent(eventRepository.findById(event.getId()).get());
+        comment.setText("Отлично полетали");
+        comment.setCreated(LocalDateTime.now().withNano(0));
+        comment.setId(1L);
+        commentService.postComment(user2.getId(), event.getId(), CommentMapper.toCommentDto(comment));
+
+        commentService.deleteComment(user2.getId(), event.getId(), comment.getId());
+
+        List<CommentDto> comments = commentService.getComments(user.getId(), event.getId());
+        assertThat(comments, is(List.of()));
+    }
+
+    @Transactional
+    @Test
+    void deleteCommentNoOwnerTest() {
+
+        User user3 = new User(3L, "Mesento", "Mesento@mail.ru");
+        userService.addUser(UserMapper.toDto(user3));
+        eventService.setPublishEvent(event.getId());
+        RequestDto requestDto = userService.postUserRequest(user2.getId(), event.getId());
+        eventService.confirmUserRequest(user.getId(), event.getId(), requestDto.getId());
+
+        comment = new Comment();
+        comment.setAuthor(user2);
+        comment.setEvent(eventRepository.findById(event.getId()).get());
+        comment.setText("Отлично полетали");
+        comment.setCreated(LocalDateTime.now().withNano(0));
+        comment.setId(1L);
+        commentService.postComment(user2.getId(), event.getId(), CommentMapper.toCommentDto(comment));
+
+        Throwable throwable = assertThrows(ValidationException.class,
+                () -> commentService.deleteComment(user3.getId(), event.getId(), comment.getId()));
+        assertThat(throwable.getMessage(), is("Ошибка удаления, пользователь не является автором комментария"));
+    }
+
+    @Transactional
+    @Test
+    void deleteCommentByAdminTest() {
+
+        User user3 = new User(3L, "Mesento", "Mesento@mail.ru");
+        userService.addUser(UserMapper.toDto(user3));
+        eventService.setPublishEvent(event.getId());
+        RequestDto requestDto = userService.postUserRequest(user2.getId(), event.getId());
+        eventService.confirmUserRequest(user.getId(), event.getId(), requestDto.getId());
+
+        comment = new Comment();
+        comment.setAuthor(user2);
+        comment.setEvent(eventRepository.findById(event.getId()).get());
+        comment.setText("Отлично полетали");
+        comment.setCreated(LocalDateTime.now().withNano(0));
+        comment.setId(1L);
+        commentService.postComment(user2.getId(), event.getId(), CommentMapper.toCommentDto(comment));
+
+        commentService.deleteComment(comment.getId());
+        List<CommentDto> comments = commentService.getComments(user.getId(), event.getId());
+        assertThat(comments, is(List.of()));
+    }
+
+    @Transactional
+    @Test
+    void deleteNotExistCommentTest() {
+        Throwable throwable = assertThrows(NullPointerException.class,
+                () -> commentService.deleteComment(comment.getId()));
     }
 }

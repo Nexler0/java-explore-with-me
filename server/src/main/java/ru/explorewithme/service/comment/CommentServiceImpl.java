@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.explorewithme.dto.comment.CommentDto;
+import ru.explorewithme.exception.NotFoundException;
 import ru.explorewithme.exception.ValidationException;
 import ru.explorewithme.model.comment.Comment;
 import ru.explorewithme.model.event.Event;
@@ -68,8 +69,14 @@ public class CommentServiceImpl implements CommentService {
     public void deleteComment(Long userId, Long eventId, Long commentId) {
         User author = userRepository.findById(userId).get();
         Comment comment = commentRepository.findById(commentId).get();
-        if (comment.getAuthor().equals(author)) {
-            commentRepository.delete(comment);
+        if (eventRepository.existsById(commentId)) {
+            if (comment.getAuthor().equals(author)) {
+                commentRepository.delete(comment);
+            } else {
+                throw new ValidationException("Ошибка удаления, пользователь не является автором комментария");
+            }
+        } else {
+            throw new NotFoundException("Данный коментарий не найден");
         }
     }
 

@@ -22,6 +22,4 @@ public class CommentDto {
     private Long authorId;
     private String text;
     private String created;
-    @EqualsAndHashCode.Exclude
-    private Boolean approve;
 }

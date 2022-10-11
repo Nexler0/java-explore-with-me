@@ -38,7 +38,6 @@ public class CommentMapper {
         comment.setEvent(eventRepository.findById(commentDto.getEventId()).get());
         comment.setText(commentDto.getText());
         comment.setCreated(LocalDateTime.now().withNano(0));
-        comment.setApprove(commentDto.getApprove());
         return comment;
     }
 
@@ -53,7 +52,6 @@ public class CommentMapper {
                 comment.getAuthor().getName(),
                 comment.getAuthor().getId(),
                 comment.getText(),
-                comment.getCreated().format(DATA_TIME_FORMATTER),
-                comment.getApprove());
+                comment.getCreated().format(DATA_TIME_FORMATTER));
     }
 }
