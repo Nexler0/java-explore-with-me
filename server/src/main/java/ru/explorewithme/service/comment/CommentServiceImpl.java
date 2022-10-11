@@ -68,15 +68,16 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void deleteComment(Long userId, Long eventId, Long commentId) {
         User author = userRepository.findById(userId).get();
+        Event event = eventRepository.findById(eventId).get();
         Comment comment = commentRepository.findById(commentId).get();
-        if (eventRepository.existsById(commentId)) {
+        if (eventRepository.existsById(commentId) && comment.getEvent().equals(event)) {
             if (comment.getAuthor().equals(author)) {
                 commentRepository.delete(comment);
             } else {
                 throw new ValidationException("Ошибка удаления, пользователь не является автором комментария");
             }
         } else {
-            throw new NotFoundException("Данный коментарий не найден");
+            throw new NotFoundException("Данный коментарий не найден или не принадлежит данному событию");
         }
     }
 
